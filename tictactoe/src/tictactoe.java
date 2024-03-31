@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class tictactoe extends JPanel
 {
@@ -55,19 +56,20 @@ public class tictactoe extends JPanel
                     frame.add(fieldButtons.get(cellValue));
                     fieldButtons.get(cellValue).addActionListener(new ActionListener()
                     {
-                        int value = cellValue;
+                        final int value = cellValue;
 
                         @Override
                         public void actionPerformed(ActionEvent e)
                         {
-                            if (!winner && gameField[value] == "empty")
+                            if (!winner && Objects.equals(gameField[value], "empty"))
                             {
                                 gameField[value] = turn;
                                 fieldButtons.get(value).setText(turn);
-                                if (turn == "X") turn = "O";
-                                else turn = "X";
 
-                                if(CheckWin())informLabel.setText("игра окончена");
+                                if(CheckWin())informLabel.setText("Победил " + turn);
+
+                                if (Objects.equals(turn, "X")) turn = "O";
+                                else turn = "X";
                             }
                             else informLabel.setText("клетка занята");
                         }
@@ -83,35 +85,35 @@ public class tictactoe extends JPanel
 
     private static boolean CheckWin()
     {
-        if((gameField[0] == gameField[1]) && (gameField[0] == gameField[2]) && (gameField[0] != "empty"))
+        if((Objects.equals(gameField[0], gameField[1])) && (Objects.equals(gameField[0], gameField[2])) && (!Objects.equals(gameField[0], "empty")))
         {
            return true;
         }
-        else if (gameField[3] == gameField[4] && gameField[3] == gameField[5] && gameField[3] != "empty")
+        else if (Objects.equals(gameField[3], gameField[4]) && Objects.equals(gameField[3], gameField[5]) && !Objects.equals(gameField[3], "empty"))
         {
             return true;
         }
-        else if (gameField[6] == gameField[7] && gameField[6] == gameField[8] && gameField[6] != "empty")
+        else if (Objects.equals(gameField[6], gameField[7]) && Objects.equals(gameField[6], gameField[8]) && !Objects.equals(gameField[6], "empty"))
         {
             return true;
         }
-        else if (gameField[0] == gameField[3] && gameField[0] == gameField[6] && gameField[0] != "empty")
+        else if (Objects.equals(gameField[0], gameField[3]) && Objects.equals(gameField[0], gameField[6]) && !Objects.equals(gameField[0], "empty"))
         {
             return true;
         }
-        else if (gameField[1] == gameField[4] && gameField[1] == gameField[7] && gameField[1] != "empty")
+        else if (Objects.equals(gameField[1], gameField[4]) && Objects.equals(gameField[1], gameField[7]) && !Objects.equals(gameField[1], "empty"))
         {
             return true;
         }
-        else if (gameField[2] == gameField[5] && gameField[2] == gameField[8] && gameField[2] != "empty")
+        else if (Objects.equals(gameField[2], gameField[5]) && Objects.equals(gameField[2], gameField[8]) && !Objects.equals(gameField[2], "empty"))
         {
             return true;
         }
-        else if (gameField[0] == gameField[4] && gameField[0] == gameField[8] && gameField[0] != "empty")
+        else if (Objects.equals(gameField[0], gameField[4]) && Objects.equals(gameField[0], gameField[8]) && !Objects.equals(gameField[0], "empty"))
         {
             return true;
         }
-        else if (gameField[2] == gameField[4] && gameField[2] == gameField[8] && gameField[2] != "empty")
+        else if (Objects.equals(gameField[2], gameField[4]) && Objects.equals(gameField[2], gameField[8]) && !Objects.equals(gameField[2], "empty"))
         {
             return true;
         }
