@@ -44,25 +44,31 @@ public class tictactoe extends JPanel
 
         for(int i = 0; i < 9; i++) gameField[i] = "empty";
         {
-            for (int y = 0; y < 3; y++) {
+            for (int y = 0; y < 3; y++)
+            {
                 xInc = 0;
                 yInc += 100;
-                for (int x = 0; x < 3; x++) {
+                for (int x = 0; x < 3; x++)
+                {
                     fieldButtons.add(new JButton(""));
                     fieldButtons.get(cellValue).setBounds(xInc, yInc, 100, 100);
                     frame.add(fieldButtons.get(cellValue));
-                    fieldButtons.get(cellValue).addActionListener(new ActionListener() {
+                    fieldButtons.get(cellValue).addActionListener(new ActionListener()
+                    {
                         int value = cellValue;
 
                         @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (!winner && gameField[value] == "empty") {
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            if (!winner && gameField[value] == "empty")
+                            {
                                 gameField[value] = turn;
                                 fieldButtons.get(value).setText(turn);
                                 if (turn == "X") turn = "O";
                                 else turn = "X";
+
+                                if(CheckWin())informLabel.setText("игра окончена");
                             }
-                            else if (winner) informLabel.setText("игра окончена");
                             else informLabel.setText("клетка занята");
                         }
                     });
@@ -73,5 +79,42 @@ public class tictactoe extends JPanel
                 frame.setResizable(false);
             }
         }
+    }
+
+    private static boolean CheckWin()
+    {
+        if((gameField[0] == gameField[1]) && (gameField[0] == gameField[2]) && (gameField[0] != "empty"))
+        {
+           return true;
+        }
+        else if (gameField[3] == gameField[4] && gameField[3] == gameField[5] && gameField[3] != "empty")
+        {
+            return true;
+        }
+        else if (gameField[6] == gameField[7] && gameField[6] == gameField[8] && gameField[6] != "empty")
+        {
+            return true;
+        }
+        else if (gameField[0] == gameField[3] && gameField[0] == gameField[6] && gameField[0] != "empty")
+        {
+            return true;
+        }
+        else if (gameField[1] == gameField[4] && gameField[1] == gameField[7] && gameField[1] != "empty")
+        {
+            return true;
+        }
+        else if (gameField[2] == gameField[5] && gameField[2] == gameField[8] && gameField[2] != "empty")
+        {
+            return true;
+        }
+        else if (gameField[0] == gameField[4] && gameField[0] == gameField[8] && gameField[0] != "empty")
+        {
+            return true;
+        }
+        else if (gameField[2] == gameField[4] && gameField[2] == gameField[8] && gameField[2] != "empty")
+        {
+            return true;
+        }
+        return false;
     }
 }
